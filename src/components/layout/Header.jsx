@@ -24,6 +24,9 @@ const Header = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top ps-3 pe-3">
         <div className="container-fluid">
+          <Link to="/" className="navbar-brand main-log-open">
+            Ecommerce App
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -36,7 +39,7 @@ const Header = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <Link to="/" className="navbar-brand">
+            <Link to="/" className="navbar-brand main-log-hide">
               Ecommerce App
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">

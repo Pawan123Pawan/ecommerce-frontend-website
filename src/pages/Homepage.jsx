@@ -9,6 +9,7 @@ import { Prices } from "../components/Prices";
 import "../styles/Homepage.css";
 import { useCart } from "../contextapi/cart";
 import { BaseUrl } from "../services/helper";
+import Crousel from "../components/crousel/crousel";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -121,13 +122,7 @@ const HomePage = () => {
   return (
     <Layout title={"ALl Products - Best offers "}>
       {/* banner image */}
-      <img
-        src="/images/banner.png"
-        className="banner-img"
-        alt="bannerimage"
-        width={"100%"}
-        height={"350px"}
-      />
+      <Crousel />
       {/* banner image */}
       <div className="container-fluid row mt-3 home-page">
         <div className="col-md-3 filters">
@@ -164,7 +159,7 @@ const HomePage = () => {
         </div>
         <div className="col-md-9 ">
           <h1 className="text-center">All Products</h1>
-          <div className="d-flex flex-wrap">
+          <div className="d-flex flex-wrap justify-content-evenly">
             {products?.map((p) => (
               <div className="card m-2" key={p._id}>
                 <img

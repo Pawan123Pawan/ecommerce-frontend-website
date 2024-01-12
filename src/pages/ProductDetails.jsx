@@ -4,10 +4,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../styles/ProductDetailsStyles.css";
 import Layout from "../components/layout/Layout";
 import { BaseUrl } from "../services/helper";
+import { useCart } from "../contextapi/cart";
+import { toast } from "react-toastify";
 
 const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const [cart, setCart] = useCart();
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -40,11 +43,11 @@ const ProductDetails = () => {
   };
   return (
     <Layout>
-      <div className="row container product-details">
+      <div className="row container product-details m-auto">
         <div className="col-md-6">
           <img
             src={`${BaseUrl}/api/v1/product/product-photo/${product?._id}`}
-            className="card-img-top"
+            className="card-img-top myImageProduct"
             alt={product.name}
             height="300"
             width={"350px"}
@@ -63,16 +66,26 @@ const ProductDetails = () => {
             })}
           </h6>
           <h6>Category : {product?.category?.name}</h6>
-          <button class="btn btn-secondary ms-1">ADD TO CART</button>
+          <button
+            class="btn btn-secondary ms-1"
+            onClick={() => {
+              setCart([...cart, product]);
+              localStorage.setItem("cart", JSON.stringify([...cart, product]));
+              toast.success("Item Added to cart");
+              console.log("Item Added to cart");
+            }}
+          >
+            ADD TO CART
+          </button>
         </div>
       </div>
       <hr />
-      <div className="row container similar-products">
+      <div className="row container similar-products m-auto">
         <h4>Similar Products ➡️</h4>
         {relatedProducts.length < 1 && (
           <p className="text-center">No Similar Products found</p>
         )}
-        <div className="d-flex flex-wrap">
+        <div className="d-flex flex-wrap gap-3">
           {relatedProducts?.map((p) => (
             <div className="card m-2" key={p._id}>
               <img
@@ -100,19 +113,19 @@ const ProductDetails = () => {
                   >
                     More Details
                   </button>
-                  {/* <button
-                  className="btn btn-dark ms-1"
-                  onClick={() => {
-                    setCart([...cart, p]);
-                    localStorage.setItem(
-                      "cart",
-                      JSON.stringify([...cart, p])
-                    );
-                    toast.success("Item Added to cart");
-                  }}
-                >
-                  ADD TO CART
-                </button> */}
+                  <button
+                    className="btn btn-dark ms-1"
+                    onClick={() => {
+                      setCart([...cart, p]);
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...cart, p])
+                      );
+                      toast.success("Item Added to cart");
+                    }}
+                  >
+                    ADD TO CART
+                  </button>
                 </div>
               </div>
             </div>

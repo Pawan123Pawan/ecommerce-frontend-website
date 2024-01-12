@@ -61,7 +61,7 @@ const Orders = () => {
                         <div className="col-md-4">
                           <img
                             src={`${BaseUrl}/api/v1/product/product-photo/${p._id}`}
-                            className="card-img-top"
+                            className=""
                             alt={p.name}
                             width="100px"
                             height={"100px"}
