@@ -9,7 +9,7 @@ import { Prices } from "../components/Prices";
 import "../styles/Homepage.css";
 import { useCart } from "../contextapi/cart";
 import { BaseUrl } from "../services/helper";
-import Crousel from "../components/crousel/crousel";
+import Crousel from "../components/crousel/Crousel";
 
 const HomePage = () => {
   const navigate = useNavigate();
