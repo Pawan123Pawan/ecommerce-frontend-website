@@ -4,18 +4,23 @@ import moment from "moment";
 import { useAuth } from "../../contextapi/auth";
 import Layout from "../../components/layout/Layout";
 import UserMenu from "../../components/layout/UserMenu";
+import Spinner from "../../components/crousel/Spinner";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
+  const [loading, setLoading] = useState(false);
   const getOrders = async () => {
+    setLoading(true); 
     try {
       const { data } = await axios.get(
         "https://ecommercebackend-a7fw.onrender.com/api/v1/auth/orders"
       );
       setOrders(data);
+      setLoading(false); 
     } catch (error) {
       console.log(error);
+      setLoading(true);
     }
   };
 
@@ -31,7 +36,7 @@ const Orders = () => {
           </div>
           <div className="col-md-9">
             <h1 className="text-center">All Orders</h1>
-            {orders?.map((o, i) => {
+            {loading? <div className="text-center"><Spinner/></div> : orders?.map((o, i) => {
               return (
                 <div className="border shadow">
                   <table className="table">

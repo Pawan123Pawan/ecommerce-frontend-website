@@ -4,16 +4,19 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/layout/AdminMenu";
+import Spinner from "../../components/crousel/Spinner";
 const Products = () => {
   const [products, setProducts] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   //getall products
   const getAllProducts = async () => {
     try {
+        setLoading(true);
       const { data } = await axios.get(
         "https://ecommercebackend-a7fw.onrender.com/api/v1/product/get-product"
       );
       setProducts(data.products);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error("Someething Went Wrong");
@@ -34,6 +37,7 @@ const Products = () => {
           <div className="col-md-9 ">
             <h1 className="text-center">All Products List</h1>
             <div className="d-flex flex-wrap">
+              {loading && <div className="d-flex w-80 m-auto"><Spinner/></div>}
               {products?.map((p) => (
                 <Link
                   key={p._id}

@@ -6,6 +6,7 @@ import { Select } from "antd";
 import { useAuth } from "../../contextapi/auth";
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/layout/AdminMenu";
+import Spinner from "../../components/crousel/Spinner";
 const { Option } = Select;
 
 const AdminOrders = () => {
@@ -16,15 +17,18 @@ const AdminOrders = () => {
     "deliverd",
     "cancel",
   ]);
+  const [loading, setLoading] = useState(false);
   const [changeStatus, setCHangeStatus] = useState("");
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const getOrders = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         "https://ecommercebackend-a7fw.onrender.com/api/v1/auth/all-orders"
       );
       setOrders(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +60,7 @@ const AdminOrders = () => {
           </div>
           <div className="col-md-9">
             <h1 className="text-center">All Orders</h1>
-            {orders?.map((o, i) => {
+            {loading? <div className="text-center"><Spinner/></div>:orders?.map((o, i) => {
               return (
                 <div className="border shadow">
                   <table className="table">

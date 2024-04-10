@@ -9,6 +9,7 @@ import { Prices } from "../components/Prices";
 import "../styles/Homepage.css";
 import { useCart } from "../contextapi/cart";
 import Crousel from "../components/crousel/Crousel";
+import Spinner from "../components/crousel/Spinner";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -121,7 +122,7 @@ const HomePage = () => {
   return (
     <Layout title={"ALl Products - Best offers "}>
       {/* banner image */}
-      <Crousel/>
+      <Crousel />
       {/* banner image */}
       <div className="container-fluid row mt-3 home-page">
         <div className="col-md-3 filters">
@@ -158,51 +159,56 @@ const HomePage = () => {
         </div>
         <div className="col-md-9 ">
           <h1 className="text-center">All Products</h1>
+
           <div className="d-flex flex-wrap justify-content-evenly">
-            {products?.map((p) => (
-              <div className="card m-2" key={p._id}>
-                <img
-                  src={`https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-photo/${p._id}`}
-                  className="card-img-top"
-                  alt={p.name}
-                />
-                <div className="card-body">
-                  <div className="card-name-price">
-                    <h5 className="card-title">{p.name}</h5>
-                    <h5 className="card-title card-price">
-                      {p.price.toLocaleString("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      })}
-                    </h5>
-                  </div>
-                  <p className="card-text ">
-                    {p.description.substring(0, 60)}...
-                  </p>
-                  <div className="card-name-price">
-                    <button
-                      className="btn btn-info ms-1"
-                      onClick={() => navigate(`/product/${p.slug}`)}
-                    >
-                      More Details
-                    </button>
-                    <button
-                      className="btn btn-dark ms-1"
-                      onClick={() => {
-                        setCart([...cart, p]);
-                        localStorage.setItem(
-                          "cart",
-                          JSON.stringify([...cart, p])
-                        );
-                        toast.success("Item Added to cart");
-                      }}
-                    >
-                      ADD TO CART
-                    </button>
+            {loading ? (
+              <Spinner />
+            ) : (
+              products?.map((p) => (
+                <div className="card m-2" key={p._id}>
+                  <img
+                    src={`https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-photo/${p._id}`}
+                    className="card-img-top"
+                    alt={p.name}
+                  />
+                  <div className="card-body">
+                    <div className="card-name-price">
+                      <h5 className="card-title">{p.name}</h5>
+                      <h5 className="card-title card-price">
+                        {p.price.toLocaleString("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        })}
+                      </h5>
+                    </div>
+                    <p className="card-text ">
+                      {p.description.substring(0, 60)}...
+                    </p>
+                    <div className="card-name-price">
+                      <button
+                        className="btn btn-info ms-1"
+                        onClick={() => navigate(`/product/${p.slug}`)}
+                      >
+                        More Details
+                      </button>
+                      <button
+                        className="btn btn-dark ms-1"
+                        onClick={() => {
+                          setCart([...cart, p]);
+                          localStorage.setItem(
+                            "cart",
+                            JSON.stringify([...cart, p])
+                          );
+                          toast.success("Item Added to cart");
+                        }}
+                      >
+                        ADD TO CART
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
           <div className="m-2 p-3">
             {products && products.length < total && (
@@ -214,7 +220,7 @@ const HomePage = () => {
                 }}
               >
                 {loading ? (
-                  "Loading ..."
+                  ""
                 ) : (
                   <>
                     {" "}

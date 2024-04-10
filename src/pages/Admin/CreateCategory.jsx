@@ -5,12 +5,14 @@ import { Modal } from "antd";
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/layout/AdminMenu";
 import CategoryForm from "../../components/Form/CategoryForm";
+import Spinner from "../../components/crousel/Spinner";
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState("");
+  const [loading, setLoading] = useState(false);
   //handle Form
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,11 +38,13 @@ const CreateCategory = () => {
   //get all cat
   const getAllCategory = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         "https://ecommercebackend-a7fw.onrender.com/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data?.category);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -115,7 +119,7 @@ const CreateCategory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {categories?.map((c) => (
+                  {loading? <div className="text-center"><Spinner/></div>:categories?.map((c) => (
                     <>
                       <tr>
                         <td key={c._id}>{c.name}</td>
