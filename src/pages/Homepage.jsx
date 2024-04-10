@@ -121,13 +121,6 @@ const HomePage = () => {
   return (
     <Layout title={"ALl Products - Best offers "}>
       {/* banner image */}
-      {/* <img
-        src="/images/banner.png"
-        className="banner-img"
-        alt="bannerimage"
-        width={"100%"}
-        height={"350px"}
-      /> */}
       <Crousel/>
       {/* banner image */}
       <div className="container-fluid row mt-3 home-page">
@@ -149,7 +142,7 @@ const HomePage = () => {
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Prices?.map((p) => (
                 <div key={p._id}>
-                  <Radio value={p.array}>{p.price}</Radio>
+                  <Radio value={p.array}>{p.name}</Radio>
                 </div>
               ))}
             </Radio.Group>

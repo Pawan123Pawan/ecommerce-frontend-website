@@ -1,7 +1,8 @@
 import React from "react";
 import { useAuth } from "../../contextapi/auth";
 import Layout from "../../components/layout/Layout";
-import UserMenu from "../../components/Layout/UserMenu";
+import UserMenu from "../../components/layout/UserMenu";
+
 const Dashboard = () => {
   const [auth] = useAuth();
   return (
