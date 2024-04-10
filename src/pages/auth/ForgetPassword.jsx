@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../styles/AuthStyles.css";
 import Layout from "../../components/layout/Layout";
-import { BaseUrl } from "../../services/helper";
 
 const ForgotPasssword = () => {
   const [email, setEmail] = useState("");
@@ -17,11 +16,14 @@ const ForgotPasssword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${BaseUrl}/api/v1/auth/forgot-password`, {
-        email,
-        newPassword,
-        answer,
-      });
+      const res = await axios.post(
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/auth/forgot-password",
+        {
+          email,
+          newPassword,
+          answer,
+        }
+      );
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
 

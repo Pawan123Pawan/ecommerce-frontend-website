@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Layout from "../../components/layout/Layout";
-import UserMenu from "../../components/layout/UserMenu";
+import UserMenu from "../../components/Layout/UserMenu";
 import { useAuth } from "../../contextapi/auth";
-import { BaseUrl } from "../../services/helper";
 const Profile = () => {
   //context
   const [auth, setAuth] = useAuth();
@@ -28,13 +27,16 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`${BaseUrl}/api/v1/auth/profile`, {
-        name,
-        email,
-        password,
-        phone,
-        address,
-      });
+      const { data } = await axios.put(
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/auth/profile",
+        {
+          name,
+          email,
+          password,
+          phone,
+          address,
+        }
+      );
       if (data?.errro) {
         toast.error(data?.error);
       } else {

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../styles/AuthStyles.css";
 import Layout from "../../components/layout/Layout";
-import { BaseUrl } from "../../services/helper";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,16 +17,21 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${BaseUrl}/api/v1/auth/register`, {
-        name,
-        email,
-        password,
-        phone,
-        address,
-        answer,
-      });
+      const res = await axios.post(
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/auth/register",
+        {
+          name,
+          email,
+          password,
+          phone,
+          address,
+          answer,
+        }
+      );
+
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
+
         navigate("/login");
       } else {
         toast.error(res.data.message);
@@ -40,7 +44,7 @@ const Register = () => {
 
   return (
     <Layout title="Register - Ecommer App">
-      <div className="form-container" style={{ minHeight: "90vh" }}>
+      <div className="form-container " style={{ minHeight: "90vh" }}>
         <form onSubmit={handleSubmit}>
           <h4 className="title">REGISTER FORM</h4>
           <div className="mb-3">

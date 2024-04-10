@@ -2,7 +2,7 @@ import React from "react";
 
 function Crousel() {
   return (
-    <div style={{ marginTop: "61px" }}>
+    <div style={{ marginTop: "61px",}}>
       <div
         id="carouselExampleRide"
         className="carousel slide"

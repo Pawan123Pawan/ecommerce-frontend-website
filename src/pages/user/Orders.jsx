@@ -3,15 +3,16 @@ import axios from "axios";
 import moment from "moment";
 import { useAuth } from "../../contextapi/auth";
 import Layout from "../../components/layout/Layout";
-import UserMenu from "../../components/layout/UserMenu";
-import { BaseUrl } from "../../services/helper";
+import UserMenu from "../../components/Layout/UserMenu";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const getOrders = async () => {
     try {
-      const { data } = await axios.get(`${BaseUrl}/api/v1/auth/orders`);
+      const { data } = await axios.get(
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/auth/orders"
+      );
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -60,8 +61,8 @@ const Orders = () => {
                       <div className="row mb-2 p-3 card flex-row" key={p._id}>
                         <div className="col-md-4">
                           <img
-                            src={`${BaseUrl}/api/v1/product/product-photo/${p._id}`}
-                            className=""
+                            src={`https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-photo/${p._id}`}
+                            className="card-img-top"
                             alt={p.name}
                             width="100px"
                             height={"100px"}

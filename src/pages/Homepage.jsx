@@ -8,8 +8,7 @@ import Layout from "../components/layout/Layout";
 import { Prices } from "../components/Prices";
 import "../styles/Homepage.css";
 import { useCart } from "../contextapi/cart";
-import { BaseUrl } from "../services/helper";
-import Crousel from "../components/crousel/Crousel";
+import Crousel from "../components/crousel/crousel";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ const HomePage = () => {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        `${BaseUrl}/api/v1/category/get-category`
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data?.category);
@@ -45,7 +44,7 @@ const HomePage = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `${BaseUrl}/api/v1/product/product-list/${page}`
+        `https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-list/${page}`
       );
       setLoading(false);
       setProducts(data.products);
@@ -59,7 +58,7 @@ const HomePage = () => {
   const getTotal = async () => {
     try {
       const { data } = await axios.get(
-        `${BaseUrl}/api/v1/product/product-count`
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-count"
       );
       setTotal(data?.total);
     } catch (error) {
@@ -76,7 +75,7 @@ const HomePage = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `${BaseUrl}/api/v1/product/product-list/${page}`
+        `https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-list/${page}`
       );
       setLoading(false);
       setProducts([...products, ...data?.products]);
@@ -108,7 +107,7 @@ const HomePage = () => {
   const filterProduct = async () => {
     try {
       const { data } = await axios.post(
-        `${BaseUrl}/api/v1/product/product-filters`,
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-filters",
         {
           checked,
           radio,
@@ -122,7 +121,14 @@ const HomePage = () => {
   return (
     <Layout title={"ALl Products - Best offers "}>
       {/* banner image */}
-      <Crousel />
+      {/* <img
+        src="/images/banner.png"
+        className="banner-img"
+        alt="bannerimage"
+        width={"100%"}
+        height={"350px"}
+      /> */}
+      <Crousel/>
       {/* banner image */}
       <div className="container-fluid row mt-3 home-page">
         <div className="col-md-3 filters">
@@ -143,7 +149,7 @@ const HomePage = () => {
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Prices?.map((p) => (
                 <div key={p._id}>
-                  <Radio value={p.array}>{p.name}</Radio>
+                  <Radio value={p.array}>{p.price}</Radio>
                 </div>
               ))}
             </Radio.Group>
@@ -163,7 +169,7 @@ const HomePage = () => {
             {products?.map((p) => (
               <div className="card m-2" key={p._id}>
                 <img
-                  src={`${BaseUrl}/api/v1/product/product-photo/${p._id}`}
+                  src={`https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-photo/${p._id}`}
                   className="card-img-top"
                   alt={p.name}
                 />

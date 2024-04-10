@@ -148,37 +148,8 @@
   margin: 0 !important;
 }
 
-/* //images for css product more detail page */
-.imageDiv {
-  width: 100%;
-  height: 380px;
-  overflow: hidden;
-}
-.mycrouselImage {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: top;
-}
-.main-log-open {
-  display: none;
-}
-.main-log-hide {
-  display: block;
-}
-@media screen and (max-width: 968px) {
-  .main-log-open {
-    display: block;
-  }
-  .main-log-hide {
-    display: none;
-  }
-}
-@media screen and (max-width: 768px) {
-  .imageDiv {
-    height: 250px !important;
-  }
-  .text-center {
-    margin: 0 !important;
-  }
+
+/* //crousel  */
+.imageDiv{
+  height: 400px;
 }

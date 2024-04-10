@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { useAuth } from "../../contextapi/auth";
-import { BaseUrl } from "../../services/helper";
 
 export default function PrivateRoute() {
   const [ok, setOk] = useState(false);
@@ -11,7 +10,10 @@ export default function PrivateRoute() {
 
   useEffect(() => {
     const authCheck = async () => {
-      const res = await axios.get(`${BaseUrl}/api/v1/auth/user-auth`);
+      const res = await axios.get(
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/auth/user-auth"
+      );
+
       if (res.data.ok) {
         setOk(true);
       } else {

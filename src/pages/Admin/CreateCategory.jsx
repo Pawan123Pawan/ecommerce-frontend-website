@@ -5,7 +5,6 @@ import { Modal } from "antd";
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/layout/AdminMenu";
 import CategoryForm from "../../components/Form/CategoryForm";
-import { BaseUrl } from "../../services/helper";
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
@@ -17,7 +16,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${BaseUrl}/api/v1/category/create-category`,
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/category/create-category",
         {
           name,
         }
@@ -29,7 +28,8 @@ const CreateCategory = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error("somthing went wrong in input form");
+      console.log(error);
+      // toast.error("somthing went wrong in input form");
     }
   };
 
@@ -37,7 +37,7 @@ const CreateCategory = () => {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        `${BaseUrl}/api/v1/category/get-category`
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data?.category);
@@ -57,7 +57,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        `${BaseUrl}/api/v1/category/update-category/${selected._id}`,
+        `https://ecommercebackend-a7fw.onrender.com/api/v1/category/update-category/${selected._id}`,
         { name: updatedName }
       );
       if (data?.success) {
@@ -77,7 +77,7 @@ const CreateCategory = () => {
   const handleDelete = async (pId) => {
     try {
       const { data } = await axios.delete(
-        `${BaseUrl}/api/v1/category/delete-category/${pId}`
+        `https://ecommercebackend-a7fw.onrender.com/api/v1/category/delete-category/${pId}`
       );
       if (data.success) {
         toast.success(`category is deleted`);

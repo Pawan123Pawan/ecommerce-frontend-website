@@ -5,7 +5,6 @@ import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import AdminMenu from "../../components/layout/AdminMenu";
 import Layout from "../../components/layout/Layout";
-import { BaseUrl } from "../../services/helper";
 const { Option } = Select;
 
 const CreateProduct = () => {
@@ -22,7 +21,7 @@ const CreateProduct = () => {
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
-        `${BaseUrl}/api/v1/category/get-category`
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data?.category);
@@ -49,7 +48,7 @@ const CreateProduct = () => {
       productData.append("photo", photo);
       productData.append("category", category);
       const { data } = axios.post(
-        `${BaseUrl}/api/v1/product/create-product`,
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/product/create-product",
         productData
       );
       if (data?.success) {

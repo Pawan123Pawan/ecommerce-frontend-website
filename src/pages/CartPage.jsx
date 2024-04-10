@@ -8,7 +8,6 @@ import "../styles/CartStyles.css";
 import { useAuth } from "../contextapi/auth";
 import { useCart } from "../contextapi/cart";
 import Layout from "../components/layout/Layout";
-import { BaseUrl } from "../services/helper";
 
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
@@ -50,7 +49,7 @@ const CartPage = () => {
   const getToken = async () => {
     try {
       const { data } = await axios.get(
-        `${BaseUrl}/api/v1/product/braintree/token`
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/product/braintree/token"
       );
       setClientToken(data?.clientToken);
     } catch (error) {
@@ -67,7 +66,7 @@ const CartPage = () => {
       setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
       const { data } = await axios.post(
-        `${BaseUrl}/api/v1/product/braintree/payment`,
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/product/braintree/payment",
         {
           nonce,
           cart,
@@ -109,7 +108,7 @@ const CartPage = () => {
                 <div className="row card flex-row" key={p._id}>
                   <div className="col-md-4">
                     <img
-                      src={`${BaseUrl}/api/v1/product/product-photo/${p._id}`}
+                      src={`https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                       width="100%"

@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import "../../styles/AuthStyles.css";
 import Layout from "../../components/layout/Layout";
 import { useAuth } from "../../contextapi/auth";
-import { BaseUrl } from "../../services/helper";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,10 +18,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${BaseUrl}/api/v1/auth/login`, {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://ecommercebackend-a7fw.onrender.com/api/v1/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+      console.log("my auth", res);
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
         setAuth({
