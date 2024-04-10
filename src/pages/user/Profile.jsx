@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Layout from "../../components/layout/Layout";
-import UserMenu from "../../components/Layout/UserMenu";
+import UserMenu from "../../components/layout/UserMenu";
 import { useAuth } from "../../contextapi/auth";
 const Profile = () => {
   //context

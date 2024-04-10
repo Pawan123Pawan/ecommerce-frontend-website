@@ -3,7 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import { useAuth } from "../../contextapi/auth";
 import Layout from "../../components/layout/Layout";
-import UserMenu from "../../components/Layout/UserMenu";
+import UserMenu from "../../components/layout/UserMenu";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
