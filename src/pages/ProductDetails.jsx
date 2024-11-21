@@ -42,13 +42,16 @@ const ProductDetails = () => {
   };
   return (
     <Layout>
-      <div className="row container product-details mx-auto" style={{width:"80%"}}>
+      <div
+        className="row container product-details mx-auto"
+        style={{ width: "80%" }}
+      >
         <div className="col-md-6">
           <img
             src={`https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-photo/${product?._id}`}
-            className="card-img-top"
+            className="card-img-top card-img"
             alt={product.name}
-            height="300"
+            height="350"
             width={"350px"}
           />
         </div>
