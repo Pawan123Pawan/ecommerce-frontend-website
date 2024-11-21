@@ -42,7 +42,7 @@ const ProductDetails = () => {
   };
   return (
     <Layout>
-      <div className="row container product-details">
+      <div className="row container product-details mx-auto" style={{width:"80%"}}>
         <div className="col-md-6">
           <img
             src={`https://ecommercebackend-a7fw.onrender.com/api/v1/product/product-photo/${product?._id}`}
